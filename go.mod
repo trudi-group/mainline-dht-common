@@ -1,4 +1,4 @@
-module github.com/wiberlin/mainline_dht_common
+module github.com/wiberlin/mainline-dht-common
 
 go 1.16
 

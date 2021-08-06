@@ -1,3 +1,4 @@
+[![GoReportCard example](https://goreportcard.com/badge/github.com/wiberlin/mainline-dht-common)](https://goreportcard.com/report/github.com/wiberlin/mainline-dht-common)
 
 # mainline-dht-common
 

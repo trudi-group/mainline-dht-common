@@ -1,6 +1,6 @@
 // Provided by @mrd0ll4r in https://github.com/cndolo/mainline-dht-crawler
 
-package mainline_dht_common
+package common
 
 import (
 	"fmt"

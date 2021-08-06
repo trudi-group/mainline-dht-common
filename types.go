@@ -1,4 +1,4 @@
-package mainline_dht_common
+package common
 
 import (
 	"github.com/anacrolix/dht/v2/krpc"

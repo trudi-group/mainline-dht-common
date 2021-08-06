@@ -1,4 +1,4 @@
-package mainline_dht_common
+package common
 
 import (
 	"bytes"
