@@ -11,6 +11,7 @@ import (
 	"github.com/anacrolix/dht/v2/krpc"
 )
 
+// IsNullSlice checks if the bytes of given slice are all null
 func IsNullSlice(arr [20]byte) bool {
 	emptySlice := make([]byte, 20)
 	val := make([]byte, 20)
@@ -22,7 +23,7 @@ func IsNullSlice(arr [20]byte) bool {
 	}
 }
 
-// Asks the user to enter "y" or "n". Also recognizes "yes" and "no" in all capitalizations.
+// AskYesNo asks the user to enter "y" or "n". Also recognizes "yes" and "no" in all capitalizations.
 // Anything unrecognized will is equivalent to "n".
 func AskYesNo() bool {
 	var response string
@@ -51,7 +52,7 @@ func containsOneResponse(inputString string, resp []string) bool {
 	return false
 }
 
-// Parses an IP:port address into anacrolix/dht krpc.NodeInfo. This is very useful when connecting to bootstrap nodes.
+// ParseAddrString parses an IP:port address into anacrolix/dht krpc.NodeInfo. This is very useful when connecting to bootstrap nodes.
 func ParseAddrString(text string) (*krpc.NodeInfo, error) {
 	host, port, err := net.SplitHostPort(text)
 	var portAsInt int
@@ -78,9 +79,8 @@ func ParseAddrString(text string) (*krpc.NodeInfo, error) {
 			Addr: *addr,
 		}
 		return nodeInfo, nil
-	} else {
-		return nil, err
 	}
+	return nil, err
 }
 
 func (e *KRPCNilResponseError) Error() string {

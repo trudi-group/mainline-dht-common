@@ -5,28 +5,28 @@ import (
 	"net"
 )
 
-// A collection of MonitoredNodeJSON
+// MonitoredNodeJSON is a collection of MonitoredNodeJSON
 type MonitorOutputJSON struct {
 	StartDate string               `json:"start_timestamp"`
 	EndDate   string               `json:"end_timestamp"`
 	Nodes     []*MonitoredNodeJSON `json:"found_nodes"`
 }
 
-// A DHT Node described by its UDP address, its connectivity status and IP Version encoded as JSON strings
+// MonitoredNodeJSON holds a DHT Node described by its UDP address, its connectivity status and IP Version encoded as JSON strings
 type MonitoredNodeJSON struct {
 	UDPAddrs  net.UDPAddr `json:"udpaddrs"`
 	Reachable bool        `json:"reachable"`
 	IPVersion string      `json:"ip_version"`
 }
 
-// Monitor Output object that contains the results of the
+// Output is an object that contains the results of the monitoring period, i.e. start and end time, and a map of ObservedNodes
 type Output struct {
 	StartDate string
 	EndDate   string
 	Nodes     map[string]*ObservedNode
 }
 
-// All the information about a single node during monitoring
+// ObservedNode contains all the information about a single node during observation
 type ObservedNode struct {
 	UDPAddr   net.UDPAddr
 	Reachable bool
@@ -36,13 +36,14 @@ type ObservedNode struct {
 // IPVersion is the version of an IP address, or unknown for invalid addresses.
 type IPVersion uint
 
+// Enum describing possible types of IP addresses
 const (
 	UnknownVersion IPVersion = iota
 	IPv4
 	IPv6
 )
 
-// KRPCResponseError signals that the KRPC Query returned an error. These could be:
+// KRPCNilResponseError signals that the KRPC Query returned an error. These could be:
 // 1. A nil pointer in the message
 // 2. Maybe a anacrolix/dht's rate limit error (TBD)
 type KRPCNilResponseError struct {
