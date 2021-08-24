@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	dht "github.com/anacrolix/dht/v2"
+	"github.com/anacrolix/dht/v2/int160"
 	"github.com/anacrolix/dht/v2/krpc"
 )
 
@@ -85,4 +86,24 @@ func ParseAddrString(text string) (*krpc.NodeInfo, error) {
 
 func (e *KRPCNilResponseError) Error() string {
 	return e.Msg
+}
+
+// TargetIsInZone returns true is targetID has zone many bits in common with sourceID
+func TargetIsInZone(sourceID [20]byte, targetID [20]byte, zone int) bool {
+	source := int160.FromByteArray(sourceID)
+	target := int160.FromByteArray(targetID)
+	var dist int160.T
+	dist.Xor(&source, &target)
+	for i := 0; i < 160; i++ {
+		if i >= zone {
+			// Got passed the zone with only 0 bits
+			return true
+		} else {
+			// Found a set bit among the first zone many bits
+			if dist.GetBit(i) {
+				return false
+			}
+		}
+	}
+	return false
 }
