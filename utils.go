@@ -103,3 +103,26 @@ func TargetIsInZone(sourceID [20]byte, targetID [20]byte, zone int) bool {
 	}
 	return false
 }
+
+// NodeInfoToID extracts each ID from an arry of krpc.NodeInfo and returns the krpc.IDs
+func NodeInfoToID(addrs []*krpc.NodeInfo) []krpc.ID {
+	peers := make([]krpc.ID, len(addrs))
+	for i, addr := range addrs {
+		peers[i] = addr.ID
+	}
+	return peers
+}
+
+// UDPToNodeAddr converts the net.UDPAddr to a krpc.NodeAddr
+func UDPToNodeAddr(udp net.UDPAddr) krpc.NodeAddr {
+	var addr krpc.NodeAddr
+	addr.FromUDPAddr(&udp)
+	return addr
+}
+
+// NodeinfoToUdpAddr converts a krpc.NodeInfo to a net.UDPAddr
+func NodeinfoToUdpAddr(nodeInfo *krpc.NodeInfo) net.UDPAddr {
+	var udp net.UDPAddr
+	udp = *nodeInfo.Addr.UDP()
+	return udp
+}

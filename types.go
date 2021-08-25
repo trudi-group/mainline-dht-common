@@ -81,9 +81,9 @@ type CrawlResult struct {
 
 // NodeKnows stores the collected addresses for a given ID
 type NodeKnows struct {
-	id    krpc.ID
-	knows []*krpc.NodeInfo
-	info  map[string]interface{}
+	Id    krpc.ID
+	Knows []*krpc.NodeInfo
+	Info  map[string]interface{}
 }
 
 // InfoHash is a 20 byte ID

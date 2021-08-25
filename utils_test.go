@@ -103,3 +103,62 @@ func TestInfohashDistance(t *testing.T) {
 		})
 	}
 }
+
+func TestNodeInfoToUDP(t *testing.T) {
+	var id [20]byte
+	copy(id[:], "abcdef")
+	addr := &krpc.NodeAddr{
+		IP:   net.ParseIP("127.0.0.1"),
+		Port: 4321,
+	}
+	nodeInfo := &krpc.NodeInfo{
+		ID:   id,
+		Addr: *addr,
+	}
+
+	actual := NodeinfoToUdpAddr(nodeInfo)
+	expected := &net.UDPAddr{
+		IP:   net.ParseIP("127.0.0.1"),
+		Port: 4321,
+	}
+	assert.Equal(t, actual.Port, expected.Port, "expected: expected: %d -- actual: %d", expected.Port, actual.Port)
+	assert.Equal(t, expected.IP, actual.IP, "expected: expected: %s -- actual: %s ", expected.IP.String(), actual.IP.String())
+}
+
+func TestNodeInfoToID(t *testing.T) {
+	var info []*krpc.NodeInfo
+	var expected []krpc.ID
+	var id [20]byte
+	var s krpc.ID
+	copy(id[:], "abcdef")
+	copy(s[:], "abcdef")
+	addr := &krpc.NodeAddr{
+		IP:   net.ParseIP("127.0.0.1"),
+		Port: 4321,
+	}
+	nodeInfo := &krpc.NodeInfo{
+		ID:   id,
+		Addr: *addr,
+	}
+	info = append(info, nodeInfo)
+	actual := NodeInfoToID(info)
+	expected = append(expected, s)
+	for i, j := range expected {
+		assert.Equal(t, j, actual[i], "expected: %s -- actual: %s", expected[i], j)
+	}
+}
+
+func TestUDPToID(t *testing.T) {
+	udpAddr := &net.UDPAddr{
+		IP:   net.ParseIP("127.0.0.1"),
+		Port: 4321,
+	}
+	expected := &krpc.NodeAddr{
+		IP:   net.ParseIP("127.0.0.1"),
+		Port: 4321,
+	}
+	actual := UDPToNodeAddr(*udpAddr)
+
+	assert.Equal(t, actual.Port, expected.Port, "expected: expected: %d -- actual: %d", expected.Port, actual.Port)
+	assert.Equal(t, expected.IP, actual.IP, "expected: expected: %s -- actual: %s ", expected.IP.String(), actual.IP.String())
+}
