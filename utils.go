@@ -84,10 +84,6 @@ func ParseAddrString(text string) (*krpc.NodeInfo, error) {
 	return nil, err
 }
 
-func (e *KRPCNilResponseError) Error() string {
-	return e.Msg
-}
-
 // TargetIsInZone returns true is targetID has zone many bits in common with sourceID
 func TargetIsInZone(sourceID [20]byte, targetID [20]byte, zone int) bool {
 	source := int160.FromByteArray(sourceID)
