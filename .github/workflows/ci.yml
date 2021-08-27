@@ -1,0 +1,27 @@
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+
+name: Build
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go env
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+
+      - name: 🔨 Build
+        run: make
+
+      - name: 🔎 Test
+        run: make test
