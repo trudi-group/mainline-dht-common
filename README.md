@@ -1,6 +1,7 @@
-[![GoReportCard example](https://goreportcard.com/badge/github.com/wiberlin/mainline-dht-common)](https://goreportcard.com/report/github.com/wiberlin/mainline-dht-common)
-
 # mainline-dht-common
+
+[![GoReportCard example](https://goreportcard.com/badge/github.com/wiberlin/mainline-dht-common)](https://goreportcard.com/report/github.com/wiberlin/mainline-dht-common)
+[![Build](https://github.com/wiberlin/mainline-dht-common/actions/workflows/ci.yml/badge.svg)](https://github.com/wiberlin/mainline-dht-common/actions/workflows/ci.yml)
 
 This is a collection of utility functions used by the different Mainline DHT projects.
 
