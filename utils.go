@@ -19,9 +19,8 @@ func IsNullSlice(arr [20]byte) bool {
 	copy(val, arr[:])
 	if bytes.Equal(val, emptySlice) {
 		return true
-	} else {
-		return false
 	}
+	return false
 }
 
 // AskYesNo asks the user to enter "y" or "n". Also recognizes "yes" and "no" in all capitalizations.
@@ -39,9 +38,8 @@ func AskYesNo() bool {
 	response = strings.ToLower(response)
 	if containsOneResponse(response, positiveResp) {
 		return true
-	} else {
-		return false
 	}
+	return false
 }
 
 func containsOneResponse(inputString string, resp []string) bool {
@@ -58,7 +56,6 @@ func ParseAddrString(text string) (*krpc.NodeInfo, error) {
 	host, port, err := net.SplitHostPort(text)
 	var portAsInt int
 	var nodeInfo *krpc.NodeInfo
-	nodeInfo = nil
 	if err != nil {
 		return nil, err
 	}

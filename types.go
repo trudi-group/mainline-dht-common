@@ -6,7 +6,7 @@ import (
 	"net"
 )
 
-// MonitoredNodeJSON is a collection of MonitoredNodeJSON
+// MonitorOutputJSON is a collection of MonitoredNodeJSON
 type MonitorOutputJSON struct {
 	StartDate string               `json:"start_timestamp"`
 	EndDate   string               `json:"end_timestamp"`

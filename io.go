@@ -108,7 +108,9 @@ func ReadBootstrapListFromFile(path string) ([]*krpc.NodeInfo, error) {
 		if strings.HasPrefix(line, "//") {
 			continue
 		}
-		ainfo, err := ParseAddrString(line)
+		// Remove any whitespaces (esp necessary with badly formatted IPv6 addrs)
+		addr := strings.Join(strings.Fields(line), "")
+		ainfo, err := ParseAddrString(addr)
 		if err != nil {
 			log.WithField("err", err).Error("Error parsing bootstrap peers.")
 			return nil, err
