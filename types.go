@@ -20,6 +20,21 @@ type MonitoredNodeJSON struct {
 	IPVersion string      `json:"ip_version"`
 }
 
+// CrawledOutputJSON is a collection of CrawledNodeJSON along with a timestamp
+type CrawlOutputJSON struct {
+	StartDate string             `json:"start_timestamp"`
+	EndDate   string             `json:"end_timestamp"`
+	Nodes     []*CrawledNodeJSON `json:"found_nodes"`
+}
+
+// CrawledNodeJSON encodes a node found by the crawler as a JSON string
+type CrawledNodeJSON struct {
+	NID       krpc.ID     `json:"NodeID"`
+	UDPAddrs  net.UDPAddr `json:"udpaddrs"`
+	Reachable bool        `json:"reachable"`
+	IPVersion string      `json:"ip_version"`
+}
+
 // Output is an object that contains the results of the monitoring period, i.e. start and end time, and a map of ObservedNodes
 type Output struct {
 	StartDate string
